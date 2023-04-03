@@ -5,7 +5,7 @@
 //Then add basic logic to the game
 
 const suits = ['Hearts', 'Clubs', 'Diamonds', 'Spades'];
-const values = ['Ace', 'King', 'Queen', 'Jack', 'Ten', 'Nine', 'Eight', 'Seven', 'Six', 'Five', 'Four', 'Three', 'Two'];
+const values = ['Ace', 'King', 'Queen', 'Jack', 10, 9, 8, 7, 6, 5, 4, 3, 2];
 //Function to create a deck object
 //can use the same function to create multiple decks if I want to add the option to play with multiple decks
 function createDeck() {
@@ -76,5 +76,25 @@ function dealCards(){
     }
 }
 dealCards();
-console.log(allPlayers);
 
+
+//create a function to calculate the score of the dealer and players
+function calculateScore(){
+    for(let i=0; i<allPlayers.length; i++){
+        let score = 0;
+        for(let j=0; j<allPlayers[i].hand.length; j++){
+            let card = allPlayers[i].hand[j];
+            if(card.includes('Ace')){
+                score += 11;
+            }else if(card.includes('King') || card.includes('Queen') || card.includes('Jack')){
+                score += 10;
+            }else{
+                score += parseInt(card);
+            }
+        }
+        allPlayers[i].score = score;
+    }
+}
+
+calculateScore()
+console.log(allPlayers);
