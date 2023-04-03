@@ -97,4 +97,21 @@ function calculateScore(){
 }
 
 calculateScore()
+
+
+
+//create a function for a specefic player to hit
+function hit(player){
+    player.hand.push(deck.pop());
+    calculateScore();
+}
+
+//test the hit function with the first player
+hit(allPlayers[1]);
 console.log(allPlayers);
+
+//create a function for a specefic player to stand
+function stand(player){
+    return;
+}
+
