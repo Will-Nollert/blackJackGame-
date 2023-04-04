@@ -44,6 +44,8 @@ let dealer = {
     hand: [],
     score: 0,
 }
+
+
 //push the dealer to the allPlayers object
 allPlayers.push(dealer);
 
@@ -99,10 +101,27 @@ function calculateScore(){
             }
         }
         allPlayers[i].score = score;
+        //if the score is over 21 then console.log that player has busted
+        if(score > 21){
+            console.log(allPlayers[i].name + " has busted!");
+        }
     }
+    
 }
 
 calculateScore()
+
+//write a function to check if the dealer or any of the players have blackjack
+function checkBlackjack(){
+    for(let i=0; i<allPlayers.length; i++){
+        if(allPlayers[i].score === 21){
+            console.log(allPlayers[i].name + " has blackjack!");
+        }
+    }
+}
+
+checkBlackjack();
+
 
 
 
@@ -121,3 +140,48 @@ function stand(player){
     return;
 }
 
+//create a function for a specefic player to double down
+function doubleDown(player){
+    player.hand.push(deck.pop());
+    calculateScore();
+    stand(player);
+}
+
+//create a function for a specefic player to split
+function split(player){
+    //add logic to check if the player has two cards of the same value
+    if(parseInt(player.hand[0]) !== parseInt(player.hand[1])){
+        console.log("You can't split");
+    };
+    //add logic to split the hand
+    player.splitHand = [player.hand.pop()]
+    player.splitScore = 0;
+    //add logic to calculate the score of the split hand
+    let score = 0;
+    for(let j=0; j<player.splitHand.length; j++){
+        let card = player.splitHand[j];
+        if(card.includes('Ace')){
+            //include logic to check if the ace should be 1 or 11
+            //if the score is over 21 then the ace should be 1
+            //if the score is under 21 then the ace should be 11
+            if(score > 11){
+                score += 1;
+            } else if (score < 11){
+            score += 11;}
+        }else if(card.includes('King') || card.includes('Queen') || card.includes('Jack')){
+            score += 10;
+        }else{
+            score += parseInt(card);
+        }
+    }
+    player.splitScore = score;
+    //if the score is over 21 then console.log that player has busted
+    if(score > 21){
+        console.log(player.name + " has busted!");
+    }
+    console.log(player);
+
+
+}
+split(allPlayers[2]);
+checkBlackjack();
