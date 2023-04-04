@@ -150,9 +150,12 @@ function doubleDown(player){
 //create a function for a specefic player to split
 function split(player){
     //add logic to check if the player has two cards of the same value
+    //TODO: logic logs "value1 NaN value2 5" bc the player.hand[0] is a string with no int value
     if(parseInt(player.hand[0]) !== parseInt(player.hand[1])){
         console.log("You can't split");
     };
+
+    console.log("value1", parseInt(player.hand[0]), "value2", parseInt(player.hand[1]));
     //add logic to split the hand
     player.splitHand = [player.hand.pop()]
     player.splitScore = 0;
