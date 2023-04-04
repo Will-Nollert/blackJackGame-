@@ -85,7 +85,13 @@ function calculateScore(){
         for(let j=0; j<allPlayers[i].hand.length; j++){
             let card = allPlayers[i].hand[j];
             if(card.includes('Ace')){
-                score += 11;
+                //include logic to check if the ace should be 1 or 11
+                //if the score is over 21 then the ace should be 1
+                //if the score is under 21 then the ace should be 11
+                if(score > 11){
+                    score += 1;
+                } else if (score < 11){
+                score += 11;}
             }else if(card.includes('King') || card.includes('Queen') || card.includes('Jack')){
                 score += 10;
             }else{
