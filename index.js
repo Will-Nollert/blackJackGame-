@@ -31,9 +31,6 @@ function shuffleDeck(deck) {
   }
 }
 
-//push the dealer to the allPlayers object
-allPlayers.push(dealer);
-
 //create a function to make a new player object
 function makePlayer() {
   let player = {
@@ -205,6 +202,7 @@ let testUser = {
 };
 let deck = createDeck();
 shuffleDeck(deck);
+allPlayers.push(dealer);
 makePlayer();
 makePlayer();
 makePlayer();
@@ -220,3 +218,20 @@ calculateSplitScore();
 calculateScore();
 checkBlackjack();
 console.log(allPlayers, "line 227");
+
+/* console logs */
+/* {
+    name: 'Dealer',
+    hand: [ '4 of Hearts', '9 of Diamonds' ],
+    splitHand: [],
+    score: 13,
+    splitScore: 0
+  } 
+  ....
+    {
+    name: 'testUser',
+    hand: [ '5 of Hearts', '5 of Clubs', 'King of Spades', '5 of Diamonds' ],
+    score: 25,
+    splitHand: [ '9 of Spades', 'Queen of Diamonds', '4 of Diamonds' ],
+    splitScore: 23
+  } */
