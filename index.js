@@ -193,6 +193,10 @@ function split(player) {
   }
   calculateScore();
 }
+//TODO: split wont work for face cards or aces, I need a regX to split the hand at "of" and then check 
+//if the first elemnet of card1 array is equal to the first element of card2 array 
+    //they should end up logging "Queen ", "Queen "
+//If those elemntes are equal or the ints are equal then the player can split
 
 // TEST SUITE ;)
 let testUser = {
