@@ -1,3 +1,4 @@
+//IMPORTS
 import inquirer from "inquirer";
 //CONSTANTS
 export const suits = ["Hearts", "Clubs", "Diamonds", "Spades"];
@@ -152,7 +153,10 @@ export function calculateSplitScore() {
     }
     allPlayers[i].splitScore = score;
     if (score > 21) {
-      console.log(`\x1b[31m%s\x1b[0m`, allPlayers[i].name + "'s split hand has busted!");
+      console.log(
+        `\x1b[31m%s\x1b[0m`,
+        allPlayers[i].name + "'s split hand has busted!"
+      );
     }
   }
 }
@@ -162,9 +166,11 @@ export function checkBlackjack() {
   for (let i = 0; i < allPlayers.length; i++) {
     if (allPlayers[i].score === 21 && allPlayers[i].name === "Dealer") {
       console.log("You lose! Dealer has BlackJack!");
+      inquirer.prompt([]);
       return;
     } else if (allPlayers[i].score === 21) {
       console.log(allPlayers[i].name + " has blackjack!");
+      inquirer.prompt([]);
     }
   }
 }
@@ -184,6 +190,7 @@ export function hitSplitHand(player) {
 }
 
 //create a function for a specefic player to stand
+//in one-player (now) starts dealers turn
 export function stand() {
   dealerPlayATurn();
 }
@@ -244,7 +251,7 @@ export function split(player) {
   calculateScore();
   playerPlayATurn();
 }
-
+//main game logic here 
 export function playerPlayATurn() {
   for (let i = 0; i < allPlayers.length; i++) {
     if (allPlayers[i].name === "Dealer") {
@@ -270,8 +277,8 @@ export function playerPlayATurn() {
           if (choice.option === "hit") {
             hit(allPlayers[i]);
             console.log(
-              allPlayers[i].name + "'s hand: " + allPlayers[i].score,
               `\n`,
+              allPlayers[i].name + "'s hand: " + allPlayers[i].score,
               allPlayers[i].hand
             );
           } else if (choice.option === "stand") {
@@ -285,15 +292,13 @@ export function playerPlayATurn() {
     }
   }
 }
-
+//helpful for logging out whats going on 
 export function showAllCards() {
   //loop through all players to console log the hand array
   //if player name is dealer only log the first card
   for (let i = 0; i < allPlayers.length; i++) {
     if (allPlayers[i].name === "Dealer") {
-      console.log( `\x1b[33m%s\x1b[0m`,
-        "Dealer Shows: ", allPlayers[i].hand[0]
-      );
+      console.log(`\x1b[33m%s\x1b[0m`, "Dealer Shows: ", allPlayers[i].hand[0]);
     } else {
       console.log(
         allPlayers[i].name + "'s hand: " + allPlayers[i].score,
@@ -306,23 +311,40 @@ export function showAllCards() {
 
 //create a function that plays a hand for the dealer
 export function dealerPlayATurn() {
-    console.log("inside DealerPlaysATurn")
   for (let i = 0; i < allPlayers.length; i++) {
-    while (allPlayers[i].name === "Dealer" && allPlayers[i].score < 17) {
+    while (allPlayers[i].name === "Dealer" && allPlayers[i].score <= 17) {
       hit(allPlayers[i]);
-      console.log(`\n`,
-        allPlayers[i].name + "'s hand: " + allPlayers[i].score,
-      );
-    }  if (allPlayers[i].name === "Dealer" && allPlayers[i].score === 21) {
-      console.log("Dealer has blackjack!", allPlayers);
-      break;
+      console.log(`\n`, allPlayers[i].name + "'s hand: " + allPlayers[i].score);
+    }
+    if (allPlayers[i].name === "Dealer" && allPlayers[i].score === 21) {
+      console.log("Dealer has blackjack!", allPlayers[0]);
+      inquirer.prompt([]);
     } else if (allPlayers[i].name === "Dealer" && allPlayers[i].score > 21) {
-      console.log(`\x1b[31m%s\x1b[0m`, "Dealer has Busted!", allPlayers);
-      break;
-    } else if (allPlayers[i].name === "Dealer" && allPlayers[i].score < 21 && allPlayers[i].score > 17){
-        console.log("Dealer Stands", allPlayers);
-        calculateScore();
-        return;
+      console.log(`\x1b[31m%s\x1b[0m`, "Dealer has Busted!", allPlayers[0]);
+      inquirer.prompt([]);
+    } else if (
+      allPlayers[i].name === "Dealer" &&
+      allPlayers[i].score < 21 &&
+      allPlayers[i].score > 17
+    ) {
+      console.log("Dealer Stands");
+      inquirer.prompt([]);
+      for (let j = 0; j < allPlayers.length; j++) {
+        if (allPlayers[j].name === "Dealer") {
+          continue;
+        }
+        if (allPlayers[j].score > allPlayers[i].score) {
+          console.log(`\x1b[32m%s\x1b[0m`, allPlayers[j].name + " wins!");
+          break;
+        } else if (allPlayers[j].score < allPlayers[i].score) {
+          console.log(`\x1b[32m%s\x1b[0m`, "Dealer wins!", allPlayers[0].hand );
+          break;
+        } else if (allPlayers[j].score === allPlayers[i].score) {
+          console.log("Push!");
+          break;
+        }
+      }
+      inquirer.prompt([]);
     }
   }
 }
