@@ -210,7 +210,7 @@ export function split(player) {
   const card2Name = playerCard2.split(" ")[0];
   // If name or int val of the cards is the same allow split (i.e "king" === "king" || 10 === 10)
   if (
-    card1Name === card2Name ||
+    card1Name === ("Ace","King","Queen","Jack") && card2Name ===("Ace","King", "Queen","Jack") ||
     parseInt(player.hand[0]) == parseInt(player.hand[1])
   ) {
     //logic to split the hand
@@ -317,10 +317,10 @@ export function dealerPlayATurn() {
       console.log(`\n`, allPlayers[i].name + "'s hand: " + allPlayers[i].score);
     }
     if (allPlayers[i].name === "Dealer" && allPlayers[i].score === 21) {
-      console.log("Dealer has blackjack!", allPlayers[0]);
+      checkBlackjack();
       inquirer.prompt([]);
     } else if (allPlayers[i].name === "Dealer" && allPlayers[i].score > 21) {
-      console.log(`\x1b[31m%s\x1b[0m`, "Dealer has Busted!", allPlayers[0]);
+      console.log(`\x1b[31m%s\x1b[0m`, "Dealer has Busted!", allPlayers[0].score);
       inquirer.prompt([]);
     } else if (
       allPlayers[i].name === "Dealer" &&
@@ -346,5 +346,7 @@ export function dealerPlayATurn() {
       }
       inquirer.prompt([]);
     }
+    inquirer.prompt([]);
   }
+  inquirer.prompt([]);
 }
