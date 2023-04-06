@@ -11,6 +11,9 @@ Javascript, Inquirer
 
  - [Rules and Basic strategy](https://www.cs.mcgill.ca/~rwest/wikispeedia/wpcd/wp/b/Blackjack.htm)
  
+## Demo 
+
+![BlackJackDemo](https://user-images.githubusercontent.com/90637390/230494875-195c08f9-a12d-4814-ab89-0d20f3d2293a.png)
 
 ## Run Locally
 
