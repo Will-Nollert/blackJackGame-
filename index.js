@@ -5,7 +5,7 @@ let allPlayers = [];
 let dealer = {
   name: "Dealer",
   hand: [],
-    splitHand: [],
+  splitHand: [],
   score: 0,
 };
 //Function to create a deck object
@@ -48,14 +48,14 @@ function dealCards() {
   for (let i = 0; i < 2; i++) {
     for (let j = 0; j < allPlayers.length; j++) {
       //wrap the deck.pop() in a conditional to check if the player name is testUser
-      if(allPlayers[j].name !== "testUser") {
-      allPlayers[j].hand.push(deck.pop());
-    } else {
-      return;
-
+      if (allPlayers[j].name !== "testUser") {
+        allPlayers[j].hand.push(deck.pop());
+      } else {
+        return;
+      }
     }
   }
-}}
+}
 
 //create a function to calculate the score of the dealer and players
 function calculateScore() {
@@ -113,7 +113,7 @@ function calculateSplitScore() {
     }
     allPlayers[i].splitScore = score;
     if (score > 21) {
-      console.log(allPlayers[i].name  + "'s split hand has busted!", "line 104");
+      console.log(allPlayers[i].name + "'s split hand has busted!", "line 104");
     }
   }
 }
@@ -151,12 +151,30 @@ function doubleDown(player) {
   stand(player);
 }
 
+//TODO: split wont work for face cards or aces, I need a regX to split the hand at "of" and then check
+//if the first elemnet of card1 array is equal to the first element of card2 array
+//they should end up logging "Queen ", "Queen "
+//If those elemntes are equal or the ints are equal then the player can split
+/* name: 'testUser',
+    hand: [ '5 of Hearts', '5 of Clubs', 'King of Spades', '5 of Diamonds' ],
+    score: 25,
+    splitHand: [ '9 of Spades', 'Queen of Diamonds', '4 of Diamonds' ],
+    splitScore: 23
+ */
+
 //create a function for a specefic player to split
 function split(player) {
+  //"King of Spades",
   const playerCard1 = player.hand[0];
-  const regex = new RegExp(playerCard1, "g");
+  //"King of Diamonds"
+  const playerCard2 = player.hand[1];
+  //King
+  const card1Name = playerCard1.split(" ")[0];
+  //King
+  const card2Name = playerCard2.split(" ")[0];
+
   if (
-    player.hand[1].match(regex) ||
+    card1Name === card2Name ||
     parseInt(player.hand[0]) == parseInt(player.hand[1])
   ) {
     //add logic to split the hand
@@ -198,15 +216,12 @@ function split(player) {
   }
   calculateScore();
 }
-//TODO: split wont work for face cards or aces, I need a regX to split the hand at "of" and then check 
-//if the first elemnet of card1 array is equal to the first element of card2 array 
-    //they should end up logging "Queen ", "Queen "
-//If those elemntes are equal or the ints are equal then the player can split
 
 // TEST SUITE ;)
 let testUser = {
   name: "testUser",
-  hand: ["5 of Hearts", "5 of Clubs"],
+  hand: ["King of Spades", "King of Diamonds"],
+  splitHand: [],
   score: 0,
 };
 let deck = createDeck();
@@ -226,7 +241,7 @@ hitSplitHand(allPlayers[6]);
 calculateSplitScore();
 calculateScore();
 checkBlackjack();
-console.log(allPlayers, "line 229");
+console.log(allPlayers, "line 244");
 
 /* console logs */
 /* {
