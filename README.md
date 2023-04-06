@@ -28,7 +28,7 @@ Install dependencies
 ```
 Start the server and client
 ```bash
-  npm run start
+  node index.js
 ```
 ## Future development 
 Short term: Continued edge case bug fixes for game logic & start sudo code for strategies 
