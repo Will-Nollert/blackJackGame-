@@ -47,10 +47,15 @@ function makePlayer() {
 function dealCards() {
   for (let i = 0; i < 2; i++) {
     for (let j = 0; j < allPlayers.length; j++) {
+      //wrap the deck.pop() in a conditional to check if the player name is testUser
+      if(allPlayers[j].name !== "testUser") {
       allPlayers[j].hand.push(deck.pop());
+    } else {
+      return;
+
     }
   }
-}
+}}
 
 //create a function to calculate the score of the dealer and players
 function calculateScore() {
@@ -221,7 +226,7 @@ hitSplitHand(allPlayers[6]);
 calculateSplitScore();
 calculateScore();
 checkBlackjack();
-console.log(allPlayers, "line 227");
+console.log(allPlayers, "line 229");
 
 /* console logs */
 /* {
