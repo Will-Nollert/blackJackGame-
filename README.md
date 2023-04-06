@@ -16,7 +16,7 @@ Javascript, Inquirer
 
 Clone the project
 ```bash
-  git clone https://github.com/Will-Nollert/ecommerce-site-socks-.git
+  git clone git@github.com:Will-Nollert/blackJackGame-.git
 ```
 Go to the project directory
 ```bash
@@ -33,7 +33,7 @@ Start the server and client
 ## Future development 
 Short term: Continued edge case bug fixes for game logic & start sudo code for strategies 
 
-medium term: Add some system of wagering
+Medium term: Add some system of wagering
 
 longer term: Implement multiple decks & players and offer different strategy suggestions 
 
