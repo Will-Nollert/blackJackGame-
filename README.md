@@ -33,5 +33,7 @@ Start the server and client
 ## Future development 
 Short term: Continued edge case bug fixes for game logic & start sudo code for strategies 
 
+medium term: Add some system of wagering
+
 longer term: Implement multiple decks & players and offer different strategy suggestions 
 
