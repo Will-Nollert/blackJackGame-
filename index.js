@@ -1,3 +1,4 @@
+
 import {
   createDeck,
   shuffleDeck,
@@ -10,19 +11,19 @@ import {
   stand,
   hitSplitHand,
   doubleDown,
+  playerPlayATurn,
   split,
   suits,
   values,
   allPlayers,
   dealer,
-  testUser, 
-  deck
+  testUser,
+  deck,
+  showAllCards,
 } from "./utils.js";
 
-// TEST SUITE ;)
-
 //create a function for basic game flow
-function startGame(){
+function startGame() {
   let deck = createDeck();
   shuffleDeck(deck);
   allPlayers.push(dealer);
@@ -30,18 +31,9 @@ function startGame(){
   dealCards();
   checkBlackjack();
   calculateScore();
-  console.log(allPlayers)
+  showAllCards();
+  playerPlayATurn();
 }
 
 startGame();
 
-/* allPlayers.push(testUser);
-checkBlackjack();
-hit(allPlayers[1]);
-split(allPlayers[6]);
-hitSplitHand(allPlayers[6]);
-calculateSplitScore();
-calculateScore();
-checkBlackjack();
-console.log(allPlayers, "line 244");
- */

@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Will-Nollert/blackJackGame-/issues"
   },
-  "homepage": "https://github.com/Will-Nollert/blackJackGame-#readme"
+  "homepage": "https://github.com/Will-Nollert/blackJackGame-#readme",
+  "dependencies": {
+    "inquirer": "^9.1.5"
+  }
 }
